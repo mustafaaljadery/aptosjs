@@ -145,27 +145,13 @@ export function useFaucet({ address, network }: UseFaucetProps) {
   const faucet_url = network === "testnet" ? "https://faucet.testnet.aptoslabs.com" : "https://faucet.devnet.aptoslabs.com"
   const faucetClient = new FaucetClient(url, faucet_url)
 
-  const [loading, setLoading] = useState(false)
-  const [data, setData] = useState<any>({})
-  const [error, setError] = useState<any>(null)
-
   const fundAccount = async () => {
-    setLoading(true)
     await faucetClient.fundAccount(address, 100_000_000);
-    setLoading(false)
   }
 
-  useEffect(() => {
-    if (address) {
-      fundAccount()
-    } else {
-      setLoading(false)
-      setData({})
-      setError("Address is required")
-    }
-  }, [address])
+  fundAccount()
 
-  return { data, loading, error }
+  return "success"
 }
 
 export function useAccount({ address, network }: UseAccountProps) {
