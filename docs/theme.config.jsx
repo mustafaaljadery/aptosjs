@@ -1,6 +1,11 @@
 export default {
-  logo: <span>My Nextra Documentation</span>,
   project: {
-    link: 'https://github.com/shuding/nextra',
+    link: 'https://github.com/mustafaaljadery/aptosjs',
+  },
+  logo: <strong>aptosjs</strong>,
+  useNextSeoProps() {
+    return {
+      titleTemplate: '%s – AptosJS',
+    };
   },
 };
