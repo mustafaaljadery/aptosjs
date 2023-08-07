@@ -1,3 +1,55 @@
 # sendFaucet
 
 Send 1 APT to a devnet or testnet account.
+
+```jsx
+import { sendFaucet } from 'aptosjs'
+```
+
+## Usage
+```tsx
+import { sendFaucet } from 'aptosjs'
+
+function App(){
+  return <button onClick={() => {
+    sendFaucet({
+      address: "0x1234567890123456789012345678901234567890",
+      network: "devnet"
+    })
+
+    }}>
+   Send APT
+ </button>
+}
+```
+
+## Example Return
+```jsx
+"success"
+```
+
+## Input Values
+```ts
+{
+  address: string,
+  network: "devnet" | "testnet"
+}
+```
+
+### Address
+
+```ts
+address: string
+```
+
+### Network
+
+```ts
+network : "devnet" | "testnet"
+```
+
+## Return Values 
+
+```ts
+"success"
+```

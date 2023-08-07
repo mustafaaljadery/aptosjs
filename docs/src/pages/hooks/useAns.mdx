@@ -1,0 +1,62 @@
+# useAns
+
+Hook for accessing Aptos Ans data.
+
+```jsx
+import { useAns } from "aptosjs"
+```
+
+## Usage
+```jsx
+import { useAns } from "aptosjs"
+
+function App() {
+  const { data, loading, error } = useAns({
+    name: "gavin", 
+    network: "mainnet"
+  })
+
+  if (loading) return <p>Loading...</p>
+  if (error) return <p>Error: {error}</p>
+  return <p>Addrees: {data?.address}</p>
+}
+```
+
+## Example Return
+```jsx
+{
+  address: "0x4eb1f5e767c7e760ced2cecc229a22ca4a252210d71ff0eadb23f4ee0dc23bb9"
+}
+```
+
+## Input Values
+```jsx
+{
+  address?: string, 
+  name?: string, 
+  network: "mainnet" | "testnet" | "devnet"
+}
+```
+
+### address (optional)
+```ts
+address: string 
+```
+
+### name (optional)
+```ts
+name: string
+```
+
+### network (required)
+```ts
+network: "mainnet" | "testnet" | "devnet"
+```
+
+## Return Values
+```jsx
+{
+  name: string | undefined,
+  address: string | undefined
+}
+```

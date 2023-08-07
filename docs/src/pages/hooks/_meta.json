@@ -1,5 +1,6 @@
 {
   "useAccount": "useAccount",
+  "useAns": "useAns",
   "useBalance": "useBalance",
   "useCollection": "useCollection",
   "useGas": "useGas",
