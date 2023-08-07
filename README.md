@@ -1,13 +1,7 @@
+<h1 align="center">AptosJS</h1>
 
 <p align="center">
-  <picture>
-    <source media="(prefers-color-scheme: dark)" srcset="https://raw.githubusercontent.com/wagmi-dev/.github/main/content/logo-dark.svg">
-    <img alt="wagmi logo" src="https://raw.githubusercontent.com/wagmi-dev/.github/main/content/logo-light.svg" width="auto" height="60">
-  </picture>
-</p>
-
-<p align="center">
-  React Hooks for Ethereum
+AptosJS is a nodejs library that provides react hooks to easily interact with the Aptos blockchain. It's designed so that you can very easily build a DApp using React or NextJS.
 <p>
 
 <p align="center">
@@ -30,8 +24,6 @@
     </picture>
   </a>
 </p>
-
-AptosJS is a nodejs library that provides react hooks to easily interact with the Aptos blockchain. It's designed so that you can very easily build a DApp using React or NextJS.
 
 ## Features
 - Hooks for connecting accounts, fetching transactions, and way more.
