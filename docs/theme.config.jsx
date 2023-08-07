@@ -8,4 +8,15 @@ export default {
       titleTemplate: '%s – AptosJS',
     };
   },
+  footer: {
+    text: (
+      <span>
+        MIT {new Date().getFullYear()} ©{' '}
+        <a href="https://aptosjs.com" target="_blank">
+          AptosJS
+        </a>
+        .
+      </span>
+    ),
+  },
 };
