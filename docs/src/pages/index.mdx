@@ -2,10 +2,81 @@
 
 AptosJS provides a collection of react hooks to interact with the Aptos blockchain. The goal of this library is to make the Aptos blockchain the easiest to build on top of.
 
-## Overview
+## Installation
+
+```bash
+npm install aptosjs aptos
+```
+
+## Example
+
+```tsx
+import { useAccount } from "aptosjs"
+
+function App() {
+  const { data, loading, error } = useAccount({
+    "address": "0xaf5b13d09028304654615f4d10d0622056912a9696c4d4fbec9d1a7033962594",
+    "network": "mainnet"
+  })
+
+  if (loading) return <div>Loading...</div>
+  if (error) return <div>{error}</div>
+  return <div>{data?.balance}</div>
+}
+```
+
+
+### Return Example
+
+```ts
+// Data returned for the following address on mainnet:  0xaf5b13d09028304654615f4d10d0622056912a9696c4d4fbec9d1a7033962594
+{
+  balance: 5216176148n,
+  formatted_balance: "52.16176148 APT",
+  tokenCount: 566,
+  transactionsCount: 6326,
+  coins: [
+    {
+    amount: 5216176148,
+    formatted_amount: "52.16176148 APT",
+    name: "Aptos Coin",
+    symbol : "APT",
+    type:"0x1::aptos_coin::AptosCoin" 
+    }
+  ],
+  nfts: [
+    {
+      amount: 1,
+      collection_id: "7b26443a061a6493aed132597e2348d39c88b4101a23a7a0c7c0677f9245376b", 
+      collection_name: "ALPHA DRAGON" ,
+      creator_addres: "0xf107df9f3e87cb68b20b84623357c3218689a6eec5595890582520326807a412", 
+      description: "766 ALPHA DRAGON ", 
+      metadata_https_uri: "https://ipfs.io/ipfs/nftstorage.link/ipfs/bafybeigho5x4ppl2zvr2eew72sei7eyqh64ckfjsgwhc5j2vdxaava5txu/762",
+      metadata_uri: "https://nftstorage.link/ipfs/bafybeigho5x4ppl2zvr2eew72sei7eyqh64ckfjsgwhc5j2vdxaava5txu/762", 
+      name: "ALPHA DRAGON #762"
+    }
+  ]
+}
+```
 
 ## Features
+AptosJS allows you to interact with the Aptos blockchain in the following ways:
+- Retrieve gas information at a given block
+- Get address APT balance
+- Send APT in devnet/testnet using Faucet
+- Get NFT information
+- Get NFT collection information
+- View account information and holdings
+and a lot more...
 
-## Authors
+## Author
+This library as created by [Mustafa Aljadery](https://maxaljadery.com).
+
+Follow me on the following: 
+- [Twitter](https://twitter.com/maxaljadery)
+- [Linkedin](https://www.linkedin.com/in/mustafaaljadery/)
+- [Github](https://github.com/mustafaaljadery)
 
 ## License
+
+All code is under an MIT License.
