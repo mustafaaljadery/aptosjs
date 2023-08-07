@@ -55,7 +55,7 @@ export function useCollection({ creatorAddress, collectionName, network }: UseCo
       description: collection.description,
       uri: collection.uri,
       https_uri: "https://ipfs.io/ipfs/" + collection.uri.split("ipfs://")[1],
-      maximum: Number(collection.maximum),
+      maximum_supply: Number(collection.maximum),
       supply: Number(collection.supply),
     })
     setLoading(false)
@@ -111,15 +111,6 @@ export function useNFT({ creatorAddress, collectionName, tokenName, network }: U
   return { data, loading, error }
 }
 
-export function useCoin() {
-
-  const [loading, setLoading] = useState(false)
-  const [data, setData] = useState<any>({})
-  const [error, setError] = useState<any>(null)
-
-  return { data, loading, error }
-}
-
 export function useGas({ network }: UseGasProps) {
   const url = network === "testnet" ? "https://fullnode.testnet.aptoslabs.com/v1" : network == "mainnet" ? "https://fullnode.mainnet.aptoslabs.com/v1" : "https://fullnode.devnet.aptoslabs.com/v1"
   const client = new AptosClient(url);
@@ -129,7 +120,6 @@ export function useGas({ network }: UseGasProps) {
   const [error, setError] = useState<any>(null)
 
   const getGas = async () => {
-    setLoading(true)
     const value = await client.estimateGasPrice()
     setData({
       deprioritized: value.deprioritized_gas_estimate,
@@ -140,6 +130,8 @@ export function useGas({ network }: UseGasProps) {
   }
 
   useEffect(() => {
+    setLoading(true)
+    getGas()
     setInterval(() => {
       getGas()
     }, 10000)
@@ -312,6 +304,15 @@ export function useTransaction({ transactionHash, network }: UseTransactionProps
     }
   }, [transactionHash])
 
+
+  return { data, loading, error }
+}
+
+export function useCoin() {
+
+  const [loading, setLoading] = useState(false)
+  const [data, setData] = useState<any>({})
+  const [error, setError] = useState<any>(null)
 
   return { data, loading, error }
 }
