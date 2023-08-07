@@ -1,0 +1,38 @@
+# useBalance
+
+Hook for accessing user balance.
+
+```jsx
+import { useBalance } from "aptosjs"
+```
+
+## Usage
+```jsx
+import { useBalance } from "aptosjs"
+
+function App(){
+  const {balance, isLoading} = useBalance()
+
+  if (isLoading) return <div>Loading...</div>
+  return <div>Balance: {balance}</div>
+}
+```
+
+## Input Values 
+
+### Address
+
+### Network (optional)
+The Aptos network you want to connect to.
+```jsx
+import { useBalance } from "aptosjs"
+
+function App(){
+  const balance = useBalance({
+    network: "devnet" | "testnet" | "mainnet"
+  })
+
+}
+```
+
+## Return Value

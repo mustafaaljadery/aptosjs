@@ -1,9 +1,11 @@
 {
   "name": "aptosjs",
-  "version": "0.0.1",
+  "version": "0.0.12",
   "description": "",
   "main": "index.js",
+  "homepage": "https://aptosjs.com",
   "scripts": {
+    "build": "tsc --module commonjs",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
@@ -13,6 +15,30 @@
   "author": "Mustafa Aljadery",
   "license": "MIT",
   "dependencies": {
-    "aptos": "^1.17.0"
-  }
+    "@types/react": "^18.2.18",
+    "@types/react-dom": "^18.2.7",
+    "aptos": "^1.17.0",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "react-query": "^3.39.3",
+    "tsx": "^3.12.7"
+  },
+  "peerDependenciesMeta": {
+    "typescript": {
+      "optional": true
+    }
+  },
+  "devDependencies": {
+    "typescript": "^5.1.6",
+    "webpack": "^5.88.2"
+  },
+  "keywords": [
+    "react",
+    "hooks",
+    "aptos",
+    "blockchain",
+    "dapps",
+    "wallet",
+    "web3"
+  ]
 }
