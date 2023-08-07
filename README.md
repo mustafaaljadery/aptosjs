@@ -1,4 +1,4 @@
-<h1 align="center">AptosJS<h1>
+# AptosJS
 
 AptosJS is a nodejs library that provides react hooks to easily interact with the Aptos blockchain. It's designed so that you can very easily build a DApp using React or NextJS.
 
