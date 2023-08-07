@@ -1,0 +1,55 @@
+# useGas
+
+Hook for returning the current gas numbers.
+
+```jsx
+import { useGas } from "aptosjs"
+```
+
+## Usage
+```jsx
+import { useGas } from "aptosjs"
+
+function App(){
+  const { data, loading, error } = useGas({
+    network: "mainnet"
+  })
+
+  if (loading) return <p>Loading...</p>
+  if (error) return <p>Error: {error}</p>
+  return <p>Gas: {data?.gas}</p>
+}
+```
+
+## Example Return 
+To format the gas number in terms of APT, divide by 100000000.
+
+```ts
+{
+  deprioritized: 100,
+  gas: 100,
+  prioritized: 150
+}
+```
+
+## Input Values
+```ts
+{
+  network: "mainnet" | "testnet" | "devnet"
+}
+```
+### Network (required)
+The Aptos network to get info from.
+
+```ts
+network: "mainnet" | "testnet" | "devnet"
+```
+
+## Return Values
+```ts
+{
+  deprioritized: int,
+  gas: int, 
+  prioritized: int 
+}
+```

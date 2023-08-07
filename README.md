@@ -1,4 +1,4 @@
-<h1 align="center" style="display: inline-block;">AptosJS</h1>
+<h1 align="center">AptosJS</h1>
 
 <p align="center">
 AptosJS is a nodejs library that provides react hooks to easily interact with the Aptos blockchain. It's designed so that you can very easily build a DApp using React or NextJS.
@@ -7,30 +7,37 @@ AptosJS is a nodejs library that provides react hooks to easily interact with th
 <p align="center">
   <a href="https://www.npmjs.com/package/aptosjs">
     <picture>
-      <source media="(prefers-color-scheme: dark)" srcset="https://img.shields.io/npm/v/aptosjs?colorA=21262d&colorB=21262d&style=flat">
-      <img src="https://img.shields.io/npm/v/aptosjs?colorA=f6f8fa&colorB=f6f8fa&style=flat" alt="Version">
+      <source media="(prefers-color-scheme: dark)" srcset="https://img.shields.io/npm/v/aptosjs?colorA=21262d&colorB=21262d&style=flat"/>
+      <img src="https://img.shields.io/npm/v/aptosjs?colorA=f6f8fa&colorB=f6f8fa&style=flat" alt="Version"/>
     </picture>
   </a>
   <a href="https://github.com/mustafaaljadery/aptosjs/blob/main/LICENSE">
     <picture>
-      <source media="(prefers-color-scheme: dark)" srcset="https://img.shields.io/npm/l/aptosjs?colorA=21262d&colorB=21262d&style=flat">
-      <img src="https://img.shields.io/npm/l/aptosjs?colorA=f6f8fa&colorB=f6f8fa&style=flat" alt="MIT License">
+      <source media="(prefers-color-scheme: dark)" srcset="https://img.shields.io/npm/l/aptosjs?colorA=21262d&colorB=21262d&style=flat"/>
+      <img src="https://img.shields.io/npm/l/aptosjs?colorA=f6f8fa&colorB=f6f8fa&style=flat" alt="MIT License"/>
     </picture>
   </a>
   <a href="https://www.npmjs.com/package/aptosjs">
     <picture>
-      <source media="(prefers-color-scheme: dark)" srcset="https://img.shields.io/npm/dm/aptosjs?colorA=21262d&colorB=21262d&style=flat">
-      <img src="https://img.shields.io/npm/dm/aptosjs?colorA=f6f8fa&colorB=f6f8fa&style=flat" alt="Downloads per month">
+      <source media="(prefers-color-scheme: dark)" srcset="https://img.shields.io/npm/dm/aptosjs?colorA=21262d&colorB=21262d&style=flat"/>
+      <img src="https://img.shields.io/npm/dm/aptosjs?colorA=f6f8fa&colorB=f6f8fa&style=flat" alt="Downloads per month"/>
     </picture>
   </a>
 </p>
 
 ## Features
-- Hooks for connecting accounts, fetching transactions, and way more.
-- Auto-refresh data as it changes
+AptosJS allows you to interact with the Aptos blockchain in the following ways:
+- Retrieve gas information at a given block
+- Get address APT balance
+- Send APT in devnet/testnet using Faucet
+- Get NFT information
+- Get NFT collection information
+- View account information and holdings
+and a lot more...
 
 ## Documentation
-Read more about documentation and examples, [aptosjs.com](https://aptosjs.com).
+
+Read more documentation and examples at [aptosjs.com](https://aptosjs.com).
 
 ## Installation
 
@@ -39,7 +46,6 @@ Install AptosJS with the aptos typescript sdk
 ```bash
 npm install aptosjs aptos
 ```
-f
 
 ## Quickstart
 

@@ -9,7 +9,7 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.useFungible = exports.useAns = exports.useMintToken = exports.useConnect = exports.useSendTransaction = exports.useTransaction = exports.useBalance = exports.useAccount = exports.useFaucet = exports.useGas = exports.useCoin = exports.useNFT = exports.useCollection = void 0;
+exports.useFungible = exports.useAns = exports.useMintToken = exports.useConnect = exports.useSendTransaction = exports.useCoin = exports.useTransaction = exports.useBalance = exports.useAccount = exports.sendFaucet = exports.useGas = exports.useNFT = exports.useCollection = void 0;
 const react_1 = require("react");
 const aptos_1 = require("aptos");
 function useCollection({ creatorAddress, collectionName, network }) {
@@ -27,7 +27,7 @@ function useCollection({ creatorAddress, collectionName, network }) {
             description: collection.description,
             uri: collection.uri,
             https_uri: "https://ipfs.io/ipfs/" + collection.uri.split("ipfs://")[1],
-            maximum: Number(collection.maximum),
+            maximum_supply: Number(collection.maximum),
             supply: Number(collection.supply),
         });
         setLoading(false);
@@ -62,7 +62,7 @@ function useNFT({ creatorAddress, collectionName, tokenName, network }) {
             maximum: Number(token === null || token === void 0 ? void 0 : token.maximum),
             supply: Number(token === null || token === void 0 ? void 0 : token.supply),
             uri: token === null || token === void 0 ? void 0 : token.uri,
-            https_url: "https://ipfs.io/ipfs/" + (token === null || token === void 0 ? void 0 : token.uri.split("ipfs://")[1]),
+            https_uri: "https://ipfs.io/ipfs/" + (token === null || token === void 0 ? void 0 : token.uri.split("ipfs://")[1]),
         });
         setLoading(false);
     });
@@ -79,13 +79,6 @@ function useNFT({ creatorAddress, collectionName, tokenName, network }) {
     return { data, loading, error };
 }
 exports.useNFT = useNFT;
-function useCoin() {
-    const [loading, setLoading] = (0, react_1.useState)(false);
-    const [data, setData] = (0, react_1.useState)({});
-    const [error, setError] = (0, react_1.useState)(null);
-    return { data, loading, error };
-}
-exports.useCoin = useCoin;
 function useGas({ network }) {
     const url = network === "testnet" ? "https://fullnode.testnet.aptoslabs.com/v1" : network == "mainnet" ? "https://fullnode.mainnet.aptoslabs.com/v1" : "https://fullnode.devnet.aptoslabs.com/v1";
     const client = new aptos_1.AptosClient(url);
@@ -93,7 +86,6 @@ function useGas({ network }) {
     const [data, setData] = (0, react_1.useState)({});
     const [error, setError] = (0, react_1.useState)(null);
     const getGas = () => __awaiter(this, void 0, void 0, function* () {
-        setLoading(true);
         const value = yield client.estimateGasPrice();
         setData({
             deprioritized: value.deprioritized_gas_estimate,
@@ -103,6 +95,8 @@ function useGas({ network }) {
         setLoading(false);
     });
     (0, react_1.useEffect)(() => {
+        setLoading(true);
+        getGas();
         setInterval(() => {
             getGas();
         }, 10000);
@@ -110,31 +104,17 @@ function useGas({ network }) {
     return { data, loading, error };
 }
 exports.useGas = useGas;
-function useFaucet({ address, network }) {
+function sendFaucet({ address, network }) {
     const url = network === "testnet" ? "https://fullnode.testnet.aptoslabs.com/v1" : "https://fullnode.devnet.aptoslabs.com/v1";
     const faucet_url = network === "testnet" ? "https://faucet.testnet.aptoslabs.com" : "https://faucet.devnet.aptoslabs.com";
     const faucetClient = new aptos_1.FaucetClient(url, faucet_url);
-    const [loading, setLoading] = (0, react_1.useState)(false);
-    const [data, setData] = (0, react_1.useState)({});
-    const [error, setError] = (0, react_1.useState)(null);
     const fundAccount = () => __awaiter(this, void 0, void 0, function* () {
-        setLoading(true);
         yield faucetClient.fundAccount(address, 100000000);
-        setLoading(false);
     });
-    (0, react_1.useEffect)(() => {
-        if (address) {
-            fundAccount();
-        }
-        else {
-            setLoading(false);
-            setData({});
-            setError("Address is required");
-        }
-    }, [address]);
-    return { data, loading, error };
+    fundAccount();
+    return "success";
 }
-exports.useFaucet = useFaucet;
+exports.sendFaucet = sendFaucet;
 function useAccount({ address, network }) {
     const url = network === "testnet" ? "https://fullnode.testnet.aptoslabs.com/v1" : network == "mainnet" ? "https://fullnode.mainnet.aptoslabs.com/v1" : "https://fullnode.devnet.aptoslabs.com/v1";
     const client = new aptos_1.AptosClient(url);
@@ -160,7 +140,7 @@ function useAccount({ address, network }) {
                     name: (_a = coin.coin_info) === null || _a === void 0 ? void 0 : _a.name,
                     symbol: (_b = coin.coin_info) === null || _b === void 0 ? void 0 : _b.symbol,
                     type: coin.coin_type,
-                    ammount: coin.amount,
+                    amount: Number(coin.amount),
                     formatted_amount: coin.amount /
                         Math.pow(10, ((_c = coin === null || coin === void 0 ? void 0 : coin.coin_info) === null || _c === void 0 ? void 0 : _c.decimals) || 0),
                 };
@@ -168,7 +148,7 @@ function useAccount({ address, network }) {
             nfts: nfts.current_token_ownerships.map((nft) => {
                 var _a, _b, _c, _d, _e, _f, _g;
                 return {
-                    amount: nft.amount,
+                    amount: Number(nft.amount),
                     collection_id: (_a = nft.current_token_data) === null || _a === void 0 ? void 0 : _a.collection_data_id_hash,
                     collection_name: (_b = nft === null || nft === void 0 ? void 0 : nft.current_token_data) === null || _b === void 0 ? void 0 : _b.collection_name,
                     name: (_c = nft === null || nft === void 0 ? void 0 : nft.current_token_data) === null || _c === void 0 ? void 0 : _c.name,
@@ -178,11 +158,13 @@ function useAccount({ address, network }) {
                     metadata_https_uri: 'https://ipfs.io/ipfs/' +
                         ((_g = nft === null || nft === void 0 ? void 0 : nft.current_token_data) === null || _g === void 0 ? void 0 : _g.metadata_uri.split('://')[1]),
                 };
-            }),
+            }).filter((nft, index, self) => index ===
+                self.findIndex((t) => t.collection_id === nft.collection_id &&
+                    t.name === nft.name)),
             transactionsCount: (_b = (_a = transactions.move_resources_aggregate) === null || _a === void 0 ? void 0 : _a.aggregate) === null || _b === void 0 ? void 0 : _b.count,
             tokenCount: (_d = (_c = tokens === null || tokens === void 0 ? void 0 : tokens.current_token_ownerships_v2_aggregate) === null || _c === void 0 ? void 0 : _c.aggregate) === null || _d === void 0 ? void 0 : _d.count,
             balance: balance,
-            formatted_balancee: (Number(balance) / 100000000) + " APT",
+            formatted_balance: (Number(balance) / 100000000) + " APT",
         });
         setLoading(false);
     });
@@ -239,7 +221,7 @@ function useTransaction({ transactionHash, network }) {
             sender: transaction.sender,
             receiver: transaction.events.filter((event) => event.type === "0x1::coin::DepositEvent")[0].guid.account_address,
             status: transaction.vm_status,
-            amount: transaction.events.filter((event) => event.type === "0x1::coin::WithdrawEvent")[0].data.amount,
+            amount: Number(transaction.events.filter((event) => event.type === "0x1::coin::WithdrawEvent")[0].data.amount)
         });
         setLoading(false);
     });
@@ -256,6 +238,13 @@ function useTransaction({ transactionHash, network }) {
     return { data, loading, error };
 }
 exports.useTransaction = useTransaction;
+function useCoin() {
+    const [loading, setLoading] = (0, react_1.useState)(false);
+    const [data, setData] = (0, react_1.useState)({});
+    const [error, setError] = (0, react_1.useState)(null);
+    return { data, loading, error };
+}
+exports.useCoin = useCoin;
 function useSendTransaction() {
 }
 exports.useSendTransaction = useSendTransaction;

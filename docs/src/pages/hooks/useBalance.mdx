@@ -11,28 +11,46 @@ import { useBalance } from "aptosjs"
 import { useBalance } from "aptosjs"
 
 function App(){
-  const {balance, isLoading} = useBalance()
+  const { data, loading, error } = useBalance()
 
-  if (isLoading) return <div>Loading...</div>
-  return <div>Balance: {balance}</div>
+  if (loading) return <div>Loading...</div>
+  if (error) return <div>Error: {error}</div>
+  return <div>Balance: {data?.formatted}</div>
+}
+```
+## Example Return
+```ts
+// The following is a use balance example of: 0xf4ae7b6d73bbacfbf094f2efe0d3ad476f2da8c188a5d45d12fa550f6576ed35
+{
+  value: 1637171n,
+  formatted: "0.01637171 APT"
 }
 ```
 
 ## Input Values 
-
-### Address
-
-### Network (optional)
-The Aptos network you want to connect to.
-```jsx
-import { useBalance } from "aptosjs"
-
-function App(){
-  const balance = useBalance({
-    network: "devnet" | "testnet" | "mainnet"
-  })
-
+```ts
+{
+  address: string,
+  network: "mainnet" | "testnet" | "local"
 }
 ```
 
+### Address (required)
+The address you want to get the balance of.
+```ts
+address: string
+```
+
+### Network (required)
+The Aptos network you want to connect to.
+```ts
+network: "mainnet" | "testnet" | "local"
+```
+
 ## Return Value
+```ts
+{
+  value: BigInt,
+  formatted: string
+}
+```

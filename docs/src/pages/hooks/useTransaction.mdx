@@ -1,0 +1,68 @@
+# useTransaction
+
+Hook for returning data on a specific transaction.
+
+```jsx
+import { useTransaction } from "aptosjs"
+```
+
+## Usage
+```jsx
+import { useTransaction } from "aptosjs"
+
+function App(){
+  const { data, loading, error } = useTransaction({
+    transactionHash: '0x76a74d2f015f7266e9a32fb3eb7afe90b6ddbc590f865e8a1925390b62d49c82', 
+    network: "mainnet"
+  })
+
+  if(loading) return <div>Loading...</div>
+  if(error) return <div>Error: {error}</div>
+  return <p>Amount: {data?.amount}</p>
+}
+
+```
+
+## Example Return 
+```ts
+{
+  gas_unit_price: 100,
+  gas_used: 6,
+  max_gas_used: 1015,
+  sender: "0xd06f0fa4b88e33e0df864b7c788d8eff9a6c75c1a3f97f4cddd5795d2ecb179d", 
+  receiver: "0x751a837653bf9a5229791c577ff15ef6aa65aff30f108457250b2d261856e6be",
+  status: "Executed successfully",
+  amount: 281500 
+}
+```
+
+## Input Values
+```ts
+{
+  transactionHash: string,
+  network: "mainnet" | "testnet" | "devnet"
+}
+```
+
+### transactionHash (required)
+```ts
+transactionHash: string
+```
+
+### network (required)
+```ts
+network: "mainnet" | "testnet" | "devnet"
+```
+
+## Return Values
+```ts
+{
+  gas_unit_price: Int, 
+  gas_used: Int, 
+  max_gas_used: Int, 
+  sender: string, 
+  receiver: string, 
+  status: string, 
+  amount: BigInt
+}
+```

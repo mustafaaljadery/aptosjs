@@ -93,7 +93,7 @@ export function useNFT({ creatorAddress, collectionName, tokenName, network }: U
       maximum: Number(token?.maximum),
       supply: Number(token?.supply),
       uri: token?.uri,
-      https_url: "https://ipfs.io/ipfs/" + token?.uri.split("ipfs://")[1],
+      https_uri: "https://ipfs.io/ipfs/" + token?.uri.split("ipfs://")[1],
     })
     setLoading(false)
   }
@@ -140,7 +140,7 @@ export function useGas({ network }: UseGasProps) {
   return { data, loading, error }
 }
 
-export function useFaucet({ address, network }: UseFaucetProps) {
+export function sendFaucet({ address, network }: UseFaucetProps) {
   const url = network === "testnet" ? "https://fullnode.testnet.aptoslabs.com/v1" : "https://fullnode.devnet.aptoslabs.com/v1"
   const faucet_url = network === "testnet" ? "https://faucet.testnet.aptoslabs.com" : "https://faucet.devnet.aptoslabs.com"
   const faucetClient = new FaucetClient(url, faucet_url)
@@ -282,7 +282,7 @@ export function useTransaction({ transactionHash, network }: UseTransactionProps
       sender: transaction.sender,
       receiver: transaction.events.filter((event: any) => event.type === "0x1::coin::DepositEvent")[0].guid.account_address,
       status: transaction.vm_status,
-      amount: transaction.events.filter((event: any) => event.type === "0x1::coin::WithdrawEvent")[0].data.amount,
+      amount: Number(transaction.events.filter((event: any) => event.type === "0x1::coin::WithdrawEvent")[0].data.amount)
     })
     setLoading(false)
   }

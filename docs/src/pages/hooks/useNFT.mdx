@@ -1,0 +1,90 @@
+# useNFT
+
+Hook for return data on a specific Token (NFT).
+
+```jsx
+import { useNFT } from 'aptosjs'
+```
+
+## Usage
+```ts
+import { useNFT } from "aptosjs"
+
+function App(){
+  const {data, loading, error} = useNFT({
+    creatorAddress: "0xc0e3fbf8ae61056d66ce624d71ccf1888f879355cc4e364ef117249b5e3160a8", 
+    collectionName: "Aptomingos",
+    tokenName: "Aptomingo #88", 
+    network: "mainnet"
+  })
+
+  if (loading) return <p>Loading...</p>
+  if (error) return <p>Error: {error}</p>
+  return <p>Name: {data?.name}</p>
+}
+```
+
+## Example Return
+```ts
+{
+  name: "Aptomingo #88", 
+  description: "", 
+  collection: undefined, 
+  maximum: 1, 
+  supply: 1,
+  uri: "ipfs://bafybeieswhmk4eyd2t2bfj3dhetq2x4g46vlvvnsnjdziosm5y25hin5bq/88.json", 
+  https_uri: "https://ipfs.io/ipfs/bafybeieswhmk4eyd2t2bfj3dhetq2x4g46vlvvnsnjdziosm5y25hin5bq/88.json" 
+}
+```
+
+## Input Values
+```ts
+{
+  creatorAddress: string,
+  collectionName: string, 
+  tokenName: string, 
+  network: string
+}
+```
+
+### creatorAddress (required)
+The address of the creator of the token.
+
+```ts
+creatorAddress: string
+```
+
+### collectionName (required)
+The name of the collection.
+
+```ts
+collectionName: string
+```
+
+### tokenName (required)
+The token name you want to get info from.
+
+```ts
+tokenName: string
+```
+
+### network (required)
+The Aptos network you want to connect to.
+
+```ts
+network: 'mainnet' | 'testnet' | "devnet"
+```
+
+
+## Return Values
+```ts
+{
+  name: string,
+  description: string, 
+  collection: string | undefined, 
+  maximum: Int, 
+  supply: Int,
+  uri: string,
+  https_uri: string
+}
+```

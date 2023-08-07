@@ -1,0 +1,79 @@
+# useCollection
+
+Hook for returning specific information on an Aptos NFT collection.
+
+```jsx
+import { useCollection } from "aptosjs"
+```
+
+## Usage
+```jsx
+import { useCollection } from "aptosjs"
+
+function App(){
+  const { data, loading, error } = useAccount({
+    creatorAddress: "0xc0e3fbf8ae61056d66ce624d71ccf1888f879355cc4e364ef117249b5e3160a8", 
+    collectionName: "Aptomingos",
+    network: "mainnet"
+  })
+
+  if (loading) return <div>Loading...</div>
+  if (error) return <div>Error: {error}</div>
+  return <p>Collection Name: {data?.name}</p>
+}
+```
+
+## Example Return
+
+```ts
+{
+ description: "1212 flamingos on the Aptos blockchain striving for a stronger and more educated ecosystem. The first of hopefully many interesting experiments conducted by B.FLY LABS.",
+ https_uri: "https://ipfs.io/ipfs/bafkreibmb7frskjxvczmpltlp3n2ts4peoaag324hxziphdmrwll6tprj4",
+ maximum: 1212,
+ name: "Aptomingos",
+ supply: 1212,
+ uri: "ipfs://bafkreibmb7frskjxvczmpltlp3n2ts4peoaag324hxziphdmrwll6tprj4"
+}
+```
+
+## Input Values
+```ts
+{
+  creatorAddress: string, 
+  collectionName: string,
+  network: "mainnet" | "testnet" | "devnet"
+}
+```
+
+### Cretor Address (required)
+The address of the creator of the NFT collection
+```ts
+creatorAddress: string
+```
+
+### Collection Name (required)
+The name of the collection you want to query
+
+```ts
+collectionName: string
+```
+
+### Network (required)
+The specific network on the Aptos blockchain you want to get data from.
+
+```ts
+network: "mainnet" | "testnet" | "devnet"
+```
+
+## Return Values
+
+```ts
+{
+  name: string, 
+  description: string, 
+  maximum: Int, 
+  supply: Int,
+  uri: string, 
+  https_uri: string
+}
+```
