@@ -183,7 +183,7 @@ export function useAccount({ address, network }: UseAccountProps) {
           name: coin.coin_info?.name,
           symbol: coin.coin_info?.symbol,
           type: coin.coin_type,
-          ammount: coin.amount,
+          amount: Number(coin.amount),
           formatted_amount:
             coin.amount /
             Math.pow(10, coin?.coin_info?.decimals || 0),
@@ -191,7 +191,7 @@ export function useAccount({ address, network }: UseAccountProps) {
       }),
       nfts: nfts.current_token_ownerships.map((nft) => {
         return {
-          amount: nft.amount,
+          amount: Number(nft.amount),
           collection_id:
             nft.current_token_data?.collection_data_id_hash,
           collection_name: nft?.current_token_data?.collection_name,
@@ -203,11 +203,18 @@ export function useAccount({ address, network }: UseAccountProps) {
             'https://ipfs.io/ipfs/' +
             nft?.current_token_data?.metadata_uri.split('://')[1],
         };
-      }),
+      }).filter((nft, index, self) =>
+        index ===
+        self.findIndex(
+          (t) =>
+            t.collection_id === nft.collection_id &&
+            t.name === nft.name
+        )
+      ),
       transactionsCount: transactions.move_resources_aggregate?.aggregate?.count,
       tokenCount: tokens?.current_token_ownerships_v2_aggregate?.aggregate?.count,
       balance: balance,
-      formatted_balancee: (Number(balance) / 100000000) + " APT",
+      formatted_balance: (Number(balance) / 100000000) + " APT",
     })
     setLoading(false)
   }

@@ -7,16 +7,70 @@ import { useAccount } from "aptosjs"
 ```
 
 ## Usage
+```tsx
+import { useAccount } from "aptosjs"
+
+function App(){
+  const { data, loading, error } = useAccount(
+    {
+      "address": "",
+      "network": "mainnet"
+    }
+  )
+
+  if (loading) return <div>Loading...</div>
+  if (error) return <div>{error}</div>
+  return <div>{data?.balance}</div>
+}
+```
 
 ## Example Return
+```ts
+// Data returned for the following address on mainnet:  
+{
+
+}
+```
 
 ## Input Values
+```ts
+{
+  address: string, 
+  network: "devnet" | "testnet" | "mainnet" 
+}
+```
 
 ## Return Values
-```json
+```ts
 {
   data: {
-
+    coins: [
+      {
+        name: string,
+        symbol: string,
+        type: string,
+        amount: Int, 
+        formatted_amount: string
+      }
+      ,...
+    ],
+    nfts: [
+      {
+        amount: Int,
+        collection_id: string,
+        collection_name: string,
+        name: string,
+        creator_address: string,
+        description: string,
+        metadata_uri: string,
+        metadata_https_uri: string 
+      }
+      ,...
+    ],
+    transactionsCount: Int,
+    tokenCount: Int, 
+    balance: BigInt,
+    formatted_balance: string
   },
   loading: boolean,
   error: string | null
